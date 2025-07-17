@@ -34,7 +34,7 @@ type ElementProps<S extends Selector> =
 
 function h<S extends Selector>(
   selector: S = 'div' as S,
-  ...children: (HTMLElement | string | ElementProps<S>)[]
+  ...children: (string | ElementProps<S>)[]
 ): string {
   const parts = selector.split(/([#.])/);
   const tag = parts[0] || 'div';

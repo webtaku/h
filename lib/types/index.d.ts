@@ -5,6 +5,6 @@ type ElementBySelector<S extends Selector> = (S extends '' ? HTMLDivElement : (S
 type ElementProps<S extends Selector> = Partial<Omit<ElementBySelector<S>, 'style'>> & {
     style?: Partial<CSSStyleDeclaration>;
 };
-declare function h<S extends Selector>(selector?: S, ...children: (HTMLElement | string | ElementProps<S>)[]): string;
+declare function h<S extends Selector>(selector?: S, ...children: (string | ElementProps<S>)[]): string;
 export { h };
 //# sourceMappingURL=index.d.ts.map
