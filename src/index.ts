@@ -55,9 +55,7 @@ function h<S extends Selector>(
   const innerHTML: string[] = [];
 
   for (const child of children) {
-    if (child instanceof HTMLElement) {
-      innerHTML.push(child.outerHTML);
-    } else if (typeof child === 'string') {
+    if (typeof child === 'string') {
       innerHTML.push(child);
     } else {
       const props = child as ElementProps<S>;
