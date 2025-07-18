@@ -64,4 +64,35 @@ describe('h()', () => {
     expect(result).toContain('<p>child1</p>');
     expect(result).toContain('<span>child2</span>');
   });
+
+  describe('custom tag', () => {
+    it('creates a custom tag element', () => {
+      const html = h('my-component');
+      expect(html.startsWith('<my-component')).toBe(true);
+      expect(html).toContain('</my-component>');
+    });
+
+    it('creates a custom tag with id and class', () => {
+      const html = h('my-widget#custom-id.foo.bar');
+      expect(html.startsWith('<my-widget')).toBe(true);
+      expect(html).toContain('id="custom-id"');
+      expect(html).toContain('class="foo bar"');
+      expect(html).toContain('</my-widget>');
+    });
+
+    it('applies properties and styles to custom tag', () => {
+      const html = h(
+        'x-foo',
+        'Hello',
+        { title: 'tooltip', style: { color: 'red' }, customAttr: 'value' }
+      );
+
+      expect(html.startsWith('<x-foo')).toBe(true);
+      expect(html).toContain('title="tooltip"');
+      expect(html).toContain('customAttr="value"');
+      expect(html).toContain('style="color: red"');
+      expect(html).toContain('Hello');
+      expect(html).toContain('</x-foo>');
+    });
+  });
 });
