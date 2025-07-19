@@ -30,17 +30,13 @@ type ElementBySelector<S extends Selector> = (
   )
 );
 
-type ElementProps<
-  S extends Selector,
-  A extends Record<string, unknown> = {}
-> =
+type ElementProps<S extends Selector> =
   & Partial<Omit<ElementBySelector<S>, 'style'>>
-  & { style?: Partial<CSSStyleDeclaration> }
-  & A;
+  & { style?: Partial<CSSStyleDeclaration> };
 
-function h<S extends Selector, A extends Record<string, unknown> = {}>(
+function h<S extends Selector>(
   selector: S = 'div' as S,
-  ...children: (string | ElementProps<S, A>)[]
+  ...children: (string | ElementProps<S> | undefined)[]
 ): string {
   const parts = selector.split(/([#.])/);
   const tag = parts[0] || 'div';
@@ -63,7 +59,7 @@ function h<S extends Selector, A extends Record<string, unknown> = {}>(
   for (const child of children) {
     if (typeof child === 'string') {
       innerHTML.push(child);
-    } else {
+    } else if (child) {
       const props = child as ElementProps<S>;
       for (const [key, value] of Object.entries(props)) {
         if (key === 'style' && typeof value === 'object') {

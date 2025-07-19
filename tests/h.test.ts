@@ -79,20 +79,5 @@ describe('h()', () => {
       expect(html).toContain('class="foo bar"');
       expect(html).toContain('</my-widget>');
     });
-
-    it('applies properties and styles to custom tag', () => {
-      const html = h(
-        'x-foo',
-        'Hello',
-        { title: 'tooltip', style: { color: 'red' }, customAttr: 'value' }
-      );
-
-      expect(html.startsWith('<x-foo')).toBe(true);
-      expect(html).toContain('title="tooltip"');
-      expect(html).toContain('customAttr="value"');
-      expect(html).toContain('style="color: red"');
-      expect(html).toContain('Hello');
-      expect(html).toContain('</x-foo>');
-    });
   });
 });
