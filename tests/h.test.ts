@@ -98,12 +98,13 @@ describe('h()', () => {
 
     it('assigns dataset with other attributes', () => {
       const html = h('span#myid.foo', {
+        className: 'bar',
         dataset: { helloWorld: 'hi' },
         title: 'my title'
       });
 
       expect(html).toContain('id="myid"');
-      expect(html).toContain('class="foo"');
+      expect(html).toContain('class="foo bar"');
       expect(html).toContain('data-hello-world="hi"');
       expect(html).toContain('title="my title"');
     });

@@ -71,8 +71,10 @@ function h<S extends Selector>(
             const kebab = dKey.replace(/([A-Z])/g, '-$1').toLowerCase();
             attrs[`data-${kebab}`] = dVal;
           }
+        } else if (key === 'className') {
+          classes.push(...(value as string).split(/\s+/));
         } else {
-          attrs[key] = String(value);
+          attrs[key] = value as string;
         }
       }
     }
