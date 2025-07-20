@@ -72,7 +72,8 @@ function h<S extends Selector>(
             attrs[`data-${kebab}`] = dVal;
           }
         } else if (key === 'className') {
-          classes.push(...(value as string).split(/\s+/));
+          const classes = (value as string).split(/\s+/);
+          if (classes.length) classes.push(...classes);
         } else {
           attrs[key] = value as string;
         }
