@@ -70,8 +70,7 @@ An object that specifies attributes and styles for the element.
 
 ```ts
 {
-  id?: string;
-  class?: string;
+  href?: string;
   style?: Partial<CSSStyleDeclaration>;
   [prop: string]: any;
 }
