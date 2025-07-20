@@ -80,4 +80,32 @@ describe('h()', () => {
       expect(html).toContain('</my-widget>');
     });
   });
+
+  describe('dataset', () => {
+    it('assigns dataset properties correctly', () => {
+      const html = h('div', {
+        dataset: {
+          foo: 'bar',
+          answer: '42',
+          isReady: 'true'
+        }
+      });
+
+      expect(html).toContain('data-foo="bar"');
+      expect(html).toContain('data-answer="42"');
+      expect(html).toContain('data-is-ready="true"');
+    });
+
+    it('assigns dataset with other attributes', () => {
+      const html = h('span#myid.foo', {
+        dataset: { helloWorld: 'hi' },
+        title: 'my title'
+      });
+
+      expect(html).toContain('id="myid"');
+      expect(html).toContain('class="foo"');
+      expect(html).toContain('data-hello-world="hi"');
+      expect(html).toContain('title="my title"');
+    });
+  });
 });

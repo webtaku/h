@@ -66,8 +66,11 @@ function h<S extends Selector>(
           style = Object.entries(value as CSSStyleDeclaration)
             .map(([k, v]) => `${k}: ${v}`)
             .join('; ');
-        } else if (key === 'class') {
-          classes.push(...(value as string).split(/\s+/));
+        } else if (key === 'dataset' && typeof value === 'object') {
+          for (const [dKey, dVal] of Object.entries(value as Record<string, string>)) {
+            const kebab = dKey.replace(/([A-Z])/g, '-$1').toLowerCase();
+            attrs[`data-${kebab}`] = dVal;
+          }
         } else {
           attrs[key] = String(value);
         }
