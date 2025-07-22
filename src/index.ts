@@ -58,7 +58,12 @@ function h<S extends Selector>(
 
   for (const child of children) {
     if (typeof child === 'string') {
-      innerHTML.push(child);
+      const lines = child.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        if (i > 0) innerHTML.push('<br>');
+        const line = lines[i];
+        if (line) innerHTML.push(line);
+      }
     } else if (child) {
       const props = child as ElementProps<S>;
       for (const [key, value] of Object.entries(props)) {
