@@ -83,8 +83,10 @@ function h<S extends Selector>(
             if (!className) continue;
             classes.push(className);
           }
+        } else if (typeof value === 'function') {
+          console.warn(`Skipping function prop "${key}" — cannot serialize functions in HTML string.`);
         } else {
-          attrs[key] = value as string;
+          attrs[key] = String(value);
         }
       }
     }
