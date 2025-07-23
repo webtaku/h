@@ -64,7 +64,13 @@ function h<S extends Selector>(
       for (const [key, value] of Object.entries(props)) {
         if (key === 'style' && typeof value === 'object') {
           style = Object.entries(value as CSSStyleDeclaration)
-            .map(([k, v]) => `${k}: ${v}`)
+            .filter(([_, v]) => v != null) // null/undefined 제거
+            .map(([k, v]) => {
+              const cssKey = k.startsWith('--')
+                ? k
+                : k.replace(/([A-Z])/g, '-$1').toLowerCase();
+              return `${cssKey}: ${v}`;
+            })
             .join('; ');
         } else if (key === 'dataset' && typeof value === 'object') {
           for (const [dKey, dVal] of Object.entries(value as Record<string, string>)) {

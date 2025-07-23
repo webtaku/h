@@ -109,4 +109,69 @@ describe('h()', () => {
       expect(html).toContain('title="my title"');
     });
   });
+
+  describe('style', () => {
+    it('applies simple style properties', () => {
+      const html = h('div', {
+        style: {
+          fontFamily: 'Arial',
+          backgroundColor: 'red'
+        }
+      });
+      expect(html).toContain('style="font-family: Arial; background-color: red"');
+    });
+
+    it('ignores null and undefined style properties', () => {
+      const html = h('div', {
+        style: {
+          color: 'blue',
+          fontSize: undefined,
+          lineHeight: null
+        } as any
+      });
+      expect(html).toContain('style="color: blue');
+      expect(html).not.toContain('font-size');
+      expect(html).not.toContain('line-height');
+    });
+
+    it('preserves CSS custom properties (variables)', () => {
+      const html = h('div', {
+        style: {
+          '--my-color': 'green',
+          backgroundColor: 'yellow'
+        } as any
+      });
+      expect(html).toContain('--my-color: green');
+      expect(html).toContain('background-color: yellow');
+    });
+  });
+
+  describe('className', () => {
+    it('appends className to selector classes', () => {
+      const html = h('div.foo', {
+        className: 'bar baz'
+      });
+      expect(html).toContain('class="foo bar baz"');
+    });
+
+    it('ignores empty class names', () => {
+      const html = h('div', {
+        className: ''
+      });
+      expect(html).not.toContain('class=""');
+    });
+  });
+
+  describe('attributes', () => {
+    it('sets arbitrary attributes', () => {
+      const html = h('button', {
+        type: 'button',
+        disabled: true,
+        title: 'Click me'
+      });
+      expect(html).toContain('type="button"');
+      expect(html).toContain('disabled="true"');
+      expect(html).toContain('title="Click me"');
+    });
+  });
 });
