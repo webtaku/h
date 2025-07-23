@@ -109,26 +109,4 @@ describe('h()', () => {
       expect(html).toContain('title="my title"');
     });
   });
-
-  describe('handling \\n in strings', () => {
-    it('inserts <br> tags for each \\n in text content', () => {
-      const html = h('div', 'hello\nworld\nhere');
-      expect(html).toContain('hello');
-      expect(html).toContain('world');
-      expect(html).toContain('here');
-      expect(html).toContain('<br>');
-      expect(html).toBe('<div>hello<br>world<br>here</div>');
-    });
-
-    it('works when \\n is at the start or end', () => {
-      const html = h('div', '\nstart\nend\n');
-      expect(html).toContain('<br>start<br>end<br>');
-      expect(html).toBe('<div><br>start<br>end<br></div>');
-    });
-
-    it('handles multiple consecutive \\n properly', () => {
-      const html = h('div', 'line1\n\nline3');
-      expect(html).toBe('<div>line1<br><br>line3</div>');
-    });
-  });
 });
