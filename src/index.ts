@@ -86,7 +86,7 @@ function h<S extends Selector>(
         } else if (typeof value === 'function') {
           console.warn(`Skipping function prop "${key}" — cannot serialize functions in HTML string.`);
         } else {
-          attrs[key] = String(value);
+          attrs[key] = value as string;
         }
       }
     }
