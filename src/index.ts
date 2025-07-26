@@ -36,7 +36,7 @@ type ElementProps<S extends Selector> =
 
 function h<S extends Selector>(
   selector: S = 'div' as S,
-  ...children: (string | ElementProps<S> | undefined)[]
+  ...args: (string | ElementProps<S> | undefined)[]
 ): string {
   const parts = selector.split(/([#.])/);
   const tag = parts[0] || 'div';
@@ -56,11 +56,11 @@ function h<S extends Selector>(
 
   const innerHTML: string[] = [];
 
-  for (const child of children) {
-    if (typeof child === 'string') {
-      innerHTML.push(child);
-    } else if (child) {
-      const props = child as ElementProps<S>;
+  for (const arg of args) {
+    if (typeof arg === 'string') {
+      innerHTML.push(arg);
+    } else if (arg) {
+      const props = arg as ElementProps<S>;
       for (const [key, value] of Object.entries(props)) {
         if (key === 'style' && typeof value === 'object') {
           style = Object.entries(value as CSSStyleDeclaration)

@@ -23,14 +23,14 @@ npm install @webtaku/h
 
 ## API
 
-### `h<S extends Selector>(selector?: S, ...children): string`
+### `h<S extends Selector>(selector?: S, ...args): string`
 
 Creates an **HTML string**.
 
 #### Parameters
 
 * `selector` (optional): A string selector such as `div`, `span#my-id`, `p.my-class`, `section#id.class`. Defaults to `div`.
-* `...children`:
+* `...args`:
 
   * `HTMLElement` — converted to `outerHTML`
   * `string` — added as HTML text
