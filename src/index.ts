@@ -35,7 +35,7 @@ type ElementProps<S extends Selector> =
   & { style?: Partial<CSSStyleDeclaration> };
 
 function h<S extends Selector>(
-  selector: S = 'div' as S,
+  selector: S = '' as S,
   ...args: (string | ElementProps<S> | undefined)[]
 ): string {
   const parts = selector.split(/([#.])/);
