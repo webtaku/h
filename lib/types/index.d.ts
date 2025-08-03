@@ -5,6 +5,7 @@ type ElementByTag<T extends Tag | string> = (T extends '' ? HTMLDivElement : (T 
 type ElementBySelector<S extends Selector> = (S extends '' ? HTMLDivElement : (S extends keyof HTMLElementTagNameMap ? HTMLElementTagNameMap[S] : (S extends `${infer T}#${string}` ? ElementByTag<T> : (S extends `${infer T}.${string}` ? ElementByTag<T> : HTMLElement))));
 type ElementProps<S extends Selector> = Partial<Omit<ElementBySelector<S>, 'style'>> & {
     style?: Partial<CSSStyleDeclaration>;
+    class?: string;
 };
 declare function h<S extends Selector>(selector?: S, ...args: (string | ElementProps<S> | undefined)[]): string;
 export { h };

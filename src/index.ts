@@ -32,7 +32,7 @@ type ElementBySelector<S extends Selector> = (
 
 type ElementProps<S extends Selector> =
   & Partial<Omit<ElementBySelector<S>, 'style'>>
-  & { style?: Partial<CSSStyleDeclaration> };
+  & { style?: Partial<CSSStyleDeclaration>, class?: string };
 
 function h<S extends Selector>(
   selector: S = '' as S,
