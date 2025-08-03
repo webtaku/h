@@ -7,6 +7,6 @@ type ElementProps<S extends Selector> = Partial<Omit<ElementBySelector<S>, 'styl
     style?: Partial<CSSStyleDeclaration>;
     class?: string;
 };
-declare function h<S extends Selector>(selector?: S, ...args: (string | ElementProps<S> | undefined)[]): string;
+declare function h<S extends Selector>(selector?: S, ...args: (string | ElementProps<S> | null | undefined)[]): string;
 export { h };
 //# sourceMappingURL=index.d.ts.map
