@@ -1,6 +1,6 @@
 {
   "name": "@webtaku/h",
-  "version": "0.0.17",
+  "version": "0.1.0",
   "types": "./lib/types/index.d.ts",
   "main": "./lib/index.js",
   "license": "(MIT OR Apache-2.0)",
