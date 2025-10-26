@@ -45,6 +45,13 @@ type ElementProps<S extends Selector> =
   & DataAttributes
   & AriaAttributes;
 
+const toKebab = (s: string) => s.replace(/([A-Z])/g, '-$1').toLowerCase();
+const toAttrVal = (v: unknown) =>
+  v === true ? 'true' : v === false ? 'false' : v == null ? '' : String(v);
+
+const normalizeCssText = (css: string) =>
+  css.replace(/^\s*;+/g, '').replace(/;+\s*$/g, '').trim(); // trim leading/trailing semicolons
+
 function h<S extends Selector>(
   selector: S = '' as S,
   ...args: (string | ElementProps<S> | null | undefined)[]
@@ -66,15 +73,10 @@ function h<S extends Selector>(
     const value = parts[i + 1];
     if (!value) continue;
     if (type === '#') id = value;
-    else if (type === '.') classes.push(value);
+    else if (type === '.') {
+      classes.push(...value.split(/\s+/).filter(Boolean));
+    }
   }
-
-  const toKebab = (s: string) => s.replace(/([A-Z])/g, '-$1').toLowerCase();
-  const toAttrVal = (v: unknown) =>
-    v === true ? 'true' : v === false ? 'false' : v == null ? '' : String(v);
-
-  const normalizeCssText = (css: string) =>
-    css.replace(/^\s*;+/g, '').replace(/;+\s*$/g, '').trim(); // trim leading/trailing semicolons
 
   const innerHTML: string[] = [];
 
